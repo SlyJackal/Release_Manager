@@ -3,9 +3,8 @@ from re import split
 import git
 git.Git("/home/slyjackal/gitlab/clone").clone("https://github.com/SlyJackal/piska-bot.git")
 #Get all messages from commits
-from git import Repo
-repo = Repo('/home/slyjackal/gitlab/clone/piska-bot')
-commits = list(repo.iter_commits('master'))
+repo = git.Repo('/home/slyjackal/gitlab/clone/piska-bot')
+commits = repo.iter_commits('master')
 how_many=(len(commits))
 print('Всего коммитов:', how_many)
 for commit in commits:
