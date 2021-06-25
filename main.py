@@ -1,8 +1,8 @@
 from re import split
-Download git
+#Download git
 import git
 git.Git("/home/slyjackal/gitlab/clone").clone("https://github.com/SlyJackal/piska-bot.git")
-Get all messages from commits
+#Get all messages from commits
 from git import Repo
 repo = Repo('/home/slyjackal/gitlab/clone/piska-bot')
 commits = list(repo.iter_commits('master'))
