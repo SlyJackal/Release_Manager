@@ -9,8 +9,7 @@ commits = repo.iter_commits('master')
 
 git_list=[]
 for commit in commits:
-    if re.search(r'\d{4,5}\d', (commit.message)) is not None:
-    git_list.append(commit.message)
+    git_list.append(re.search(r'\d{4,5}\d', (commit.message))
    
 print(git_list)
 
