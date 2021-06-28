@@ -9,7 +9,7 @@ commits = repo.iter_commits('master')
 
 git_list=[]
 for commit in commits:
-    git_list.append(re.search(r'\d{4,5}\d', (commit.message))
+    git_list.append(re.search(r'\d{4,5}', (commit.message))).group(0)
    
 print(git_list)
 
@@ -18,5 +18,5 @@ print(git_list)
 #task_list = re.search(r'\d{4,5}', r=a)
 #task_list = re.search(r'\b[горь]\, git_list)
 #print (task_list.group(0))
- if re.search(r'\d{4,5}\d', git_list) is not None:
-        print('I find')
+# if re.search(r'\d{4,5}\d', git_list) is not None:
+#        print('I find')
