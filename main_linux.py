@@ -9,7 +9,7 @@ commits = repo.iter_commits('master')
 
 git_list=[]
 for commit in commits:
-    git_result=(', '.join(map(str, commit.message)))
+    git_result=(', '.join(commit.message))
     git_list.append(re.findall(r'\d{4,5}', (git_result)))
    
 #git_result=(', '.join(map(str, git_list)))
