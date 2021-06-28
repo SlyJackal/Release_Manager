@@ -9,10 +9,11 @@ commits = repo.iter_commits('master')
 
 git_list=[]
 for commit in commits:
-    git_list.append(re.findall(r'\d{4,5}', (commit.message)))
+    git_result=(', '.join(map(str, commit.message)))
+    git_list.append(re.findall(r'\d{4,5}', (git_result)))
    
-git_result=(', '.join(map(str, git_list)))
-print(git_result)
+#git_result=(', '.join(map(str, git_list)))
+print(git_list)
 #Find all numbers
 #find from 4 to 5 numbers \d{4,5}
 #task_list = re.search(r'\d{4,5}', r=a)
