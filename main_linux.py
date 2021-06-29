@@ -1,24 +1,15 @@
-import re
-#re.split and re.sub
 #Download git
 import git
-#git.Git("/home/slyjackal/Git").clone("https://github.com/SlyJackal/piska-bot.git")
+git.Git("/home/slyjackal/Git").clone("https://github.com/SlyJackal/piska-bot.git")
 #Get all messages from commits
+import re
 repo = git.Repo('/home/slyjackal/Git/piska-bot')
 commits = repo.iter_commits('master')
 
-git_list=[]
+git_list=''
 for commit in commits:
-    git_result=(', '.join(commit.message))
-    git_list.append(git_result)
-    print(git_list)
-   #git_list_str=re.findall(r'\d{4,5}', git_list)
-#git_result=(', '.join(map(str, git_list)))
-#print(git_list_str)
-#Find all numbers
-#find from 4 to 5 numbers \d{4,5}
-#task_list = re.search(r'\d{4,5}', r=a)
-#task_list = re.search(r'\b[горь]\, git_list)
-#print (task_list.group(0))
-# if re.search(r'\d{4,5}\d', git_list) is not None:
-#        print('I find')
+    git_list += commit.message
+
+result = re.findall(r'\d{4,5}', git_list)
+print(result)
+
