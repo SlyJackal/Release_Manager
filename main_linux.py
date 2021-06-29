@@ -25,6 +25,7 @@ git_list = re.findall(r'\d{4,5}', git_list_str)
 #Get tasks from jira
 from jira import JIRA
 from jira.client import JiraCookieAuth
+jac = JIRA('https://jira.atlassian.com')
 print('Введите логин от Jira')
 login=input()
 print('Введите пароль от Jira')
