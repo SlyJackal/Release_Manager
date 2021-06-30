@@ -1,4 +1,3 @@
-import git
 #Get data
 print('Введите куда клонировать Git, пример: /home/slyjackal/Git')
 clone_in=input()
@@ -8,9 +7,11 @@ print('Введите название репозитория, пример: pis
 git_name=input()
 print('Введите название ветки, пример: master')
 fork_name=input()
-git.Git(clone_in).clone(clone_from)
+
 
 #Download git and get all messages from commits
+import git
+git.Git(clone_in).clone(clone_from)
 repo = git.Repo('/'.join(str(x) for x in [clone_in,git_name]))
 commits = repo.iter_commits(fork_name)
 git_list_str=''
