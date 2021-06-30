@@ -1,4 +1,4 @@
-
+import git
 #Get data
 print('Введите куда клонировать Git, пример: /home/slyjackal/Git')
 clone_in=input()
@@ -11,7 +11,6 @@ fork_name=input()
 git.Git(clone_in).clone(clone_from)
 
 #Download git and get all messages from commits
-import git
 repo = git.Repo('/'.join(str(x) for x in [clone_in,git_name]))
 commits = repo.iter_commits(fork_name)
 git_list_str=''
@@ -23,7 +22,7 @@ import re
 git_list = re.findall(r'\d{4,5}', git_list_str)
 
 #Get tasks from jira
-from jira import JIRA
+"""from jira import JIRA
 from jira.client import JiraCookieAuth
 jac = JIRA('https://jira.atlassian.com')
 print('Введите логин от Jira')
@@ -33,9 +32,9 @@ password=input()
 auth_jira = JIRA(basic_auth=(login, password))
 print('Введите JQL запрос для выбора задач')
 JQL=input()
-jira_list = [JiraCookieAuth.search_issues(JQL)]
-#jira_list = ['1234', '12345', '12345', '4444', '4444', '12345', '1234', '0000']
+jira_list = [JiraCookieAuth.search_issues(JQL)]"""
+jira_list = ['1234', '12345', '12345', '4444', '4444', '12345', '1234', '0000']
 
 #Check lists
 res = [x for x in git_list + jira_list if x not in jira_list]
-print('В Git нет следующих доработок:', res
+print('В Git нет следующих доработок:', res)
