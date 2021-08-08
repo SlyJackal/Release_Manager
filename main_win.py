@@ -18,8 +18,11 @@ fork_name='master'
 
 
 #Download git and get all messages from commits
-import git
-git.Git(clone_in).clone(clone_from)
+import git, os
+
+from jira.resources import Issue
+if not os.path.isdir(clone_in + '/' + git_name):
+   git.Git(clone_in).clone(clone_from)
 repo = git.Repo('/'.join(str(x) for x in [clone_in,git_name]))
 commits = repo.iter_commits(fork_name)
 git_list_str=''
@@ -33,19 +36,30 @@ git_list = re.findall(r'\d{4,5}', git_list_str)
 #Get tasks from jira
 from jira import JIRA
 from jira.client import JiraCookieAuth
-jac = JIRA('https://jira.atlassian.com')
 #Acces to Jira
 print('Введите логин от Jira')
 login=input()
-print('Введите пароль от Jira')
-password=input()
-auth_jira = JIRA(basic_auth=(login, password))
 
+#By password
+#print('Введите пароль от Jira')
+#password=input()
+
+#By token
+print('Введите ваш токен')
+token=input()
+auth_jira = JIRA('https://team-1602178802459.atlassian.net', basic_auth=(login, token))
 print('Введите JQL запрос для выбора задач')
-JQL=input()
-jira_list = [JiraCookieAuth.search_issues(JQL)]
-jira_list = ['1234', '12345', '12345', '4444', '4444', '12345', '1234', '0000']
+jql_string='project = AHEBURG order by created DESC'
+jira_list = auth_jira.search_issues(jql_string)
+issues_list=[]
+for issue in jira_list:
+  issues_list.append(issue.key.split('-')[1])
+print('Jira list:')
+print(issues_list)
+print('Git list:')
+print(git_list)
+
 
 #Check lists
-res = [x for x in git_list + jira_list if x not in jira_list]
+res = [x for x in git_list + issues_list if x not in issues_list]
 print('В Git нет следующих доработок:', res)
