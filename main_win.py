@@ -11,6 +11,7 @@ fork_name=input()
 """
 #Test data
 clone_in='D:\Git'
+#relative path '.\'
 clone_from='https://github.com/SlyJackal/piska-bot.git'
 git_name='piska-bot'
 fork_name='master'
