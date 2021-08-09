@@ -61,5 +61,5 @@ print(git_list)
 
 
 #Check lists
-res = [x for x in git_list + issues_list if x not in issues_list]
+res = [x for x in git_list + issues_list if x not in git_list]
 print('В Git нет следующих доработок:', res)
