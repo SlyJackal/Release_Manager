@@ -10,7 +10,6 @@ fork_name=input()
 
 #Скачать репозиторий
 import git, os
-from jira.resources import Issue
 if not os.path.isdir(clone_in + '/' + git_name):
    git.Git(clone_in).clone(clone_from)
 
