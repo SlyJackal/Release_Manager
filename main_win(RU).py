@@ -1,3 +1,11 @@
+import git
+import os
+import re
+import argparse
+from jira import JIRA
+
+
+
 #Данные о сборке
 print('Введите куда клонировать Git, пример: D:\Git')
 clone_in=input()
@@ -9,7 +17,6 @@ print('Введите название ветки, пример: master')
 fork_name=input()
 
 #Скачать репозиторий
-import git, os
 if not os.path.isdir(clone_in + '/' + git_name):
    git.Git(clone_in).clone(clone_from)
 
@@ -21,11 +28,10 @@ for commit in commits:
    git_list_str += commit.message
 
 #Найти номера всех задач
-import re
 git_list = re.findall(r'\d{4,5}', git_list_str)
 
 #Подключение модуля Jira
-from jira import JIRA
+
 #Получить доступ в Jira
 print('Введите логин от Jira')
 login=input()
