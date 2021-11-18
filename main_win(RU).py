@@ -6,6 +6,21 @@ from jira import JIRA
 
 
 
+#Создание аргументов
+parser.add_argument('integers', type=int,  help='an integer for the accumulator')
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("-jira_user", dest="user", required=True)
+parser.add_argument("-jira_pass", dest="pass", required=True)
+args = parser.parse_args()
+print(args)
+
+release_manager.py --jira_user test --jira_password pass
+
+
+
+
 #Данные о сборке
 print('Введите куда клонировать Git, пример: D:\Git')
 clone_in=input()
