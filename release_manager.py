@@ -7,15 +7,10 @@ from jira import JIRA
 
 
 #Создание аргументов
-parser.add_argument('integers', type=int,  help='an integer for the accumulator')
-
 parser = argparse.ArgumentParser()
-
 parser.add_argument("-jira_user", dest="user", required=True)
 parser.add_argument("-jira_pass", dest="pass", required=True)
 args = parser.parse_args()
-print(args)
-
 release_manager.py --jira_user test --jira_password pass
 
 
@@ -45,17 +40,12 @@ for commit in commits:
 #Найти номера всех задач
 git_list = re.findall(r'\d{4,5}', git_list_str)
 
-#Подключение модуля Jira
 
 #Получить доступ в Jira
-print('Введите логин от Jira')
-login=input()
-#Через токен
-print('Введите ваш токен')
-token=input()
-'''#Через пароль
-print('Введите пароль от Jira')
-password=input()'''
+login=user
+
+#Через пароль
+password=pass
 
 #Подключение к нашей Jira
 jira_host='https://team-1602178802459.atlassian.net' '''Установить свой адрес'''
