@@ -9,9 +9,9 @@ from jira import JIRA
 #Создание аргументов
 parser = argparse.ArgumentParser()
 parser.add_argument("-jira_user", dest="user", required=True)
-parser.add_argument("-jira_pass", dest="pass", required=True)
+parser.add_argument("-jira_pass", dest="jira_jpass", required=True)
 args = parser.parse_args()
-release_manager.py --jira_user test --jira_password pass
+print(args)
 
 
 
@@ -45,11 +45,11 @@ git_list = re.findall(r'\d{4,5}', git_list_str)
 login=user
 
 #Через пароль
-password=pass
+password=jira_pass
 
 #Подключение к нашей Jira
 jira_host='https://team-1602178802459.atlassian.net' '''Установить свой адрес'''
-auth_jira = JIRA(jira_host, basic_auth=(login, token))
+auth_jira = JIRA(jira_host, auth=(login, password))
 
 #Запрос списка задач у пользователя
 print('Введите JQL запрос для выбора задач. Пример: project = AHEBURG order by created DESC')
