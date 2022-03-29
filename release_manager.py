@@ -42,14 +42,26 @@ git_list = re.findall(r'\d{4,5}', git_list_str)
 
 
 #Получить доступ в Jira
-login=user
+JIRA_URL_REST_API = r'http://jira.cbr.ru/rest/api/2'
 
-#Через пароль
-password=jira_pass
+# Замена некорректных символов, которые могут встречаться в полях issue в Jira
+def replace_incorrect_charset_symbols(info):
+    return info.encode('cp1251', errors='replace').decode('cp1251') if info else ' '
 
-#Подключение к нашей Jira
-jira_host='https://team-1602178802459.atlassian.net' '''Установить свой адрес'''
-auth_jira = JIRA(jira_host, auth=(login, password))
+
+def parser_command_line_arguments():
+    """объявление парсера для внешнего параметра"""
+    parser = argparse.ArgumentParser(description='build version script')
+    parser.add_argument('file_name', help='file name report')
+    return parser
+
+
+def get_requests(url):
+    if not JIRA_AUTH:
+        logger.error('System environment JIRA_AUTH not set!')
+        sys.exit(1)
+    return requests.get(url, headers={'Authorization': 'Basic %s' % JIRA_AUTH})
+
 
 #Запрос списка задач у пользователя
 print('Введите JQL запрос для выбора задач. Пример: project = AHEBURG order by created DESC')
@@ -58,6 +70,10 @@ jira_list = auth_jira.search_issues(jql_string)
 issues_list=[]
 for issue in jira_list:
   issues_list.append(issue.key.split('-')[1])
+
+
+
+
 
 #Проверка списка задач в Git
 res = [x for x in git_list + issues_list if x not in git_list]
